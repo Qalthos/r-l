@@ -26,15 +26,15 @@ class Player(Entity):
     """Entity representing the player's character."""
 
     def handle_key(self, event):
-        if event.key in ['UP', 'DOWN', 'LEFT', 'RIGHT']:
+        if event.keychar in ['UP', 'DOWN', 'LEFT', 'RIGHT', 'h', 'j', 'k', 'l']:
             dx, dy = 0, 0
-            if event.key == 'UP':
+            if event.keychar in ['UP', 'k']:
                 dy = -1
-            elif event.key == 'LEFT':
+            elif event.keychar in ['LEFT', 'h']:
                 dx = -1
-            elif event.key == 'DOWN':
+            elif event.keychar in ['DOWN', 'j']:
                 dy = 1
-            elif event.key == 'RIGHT':
+            elif event.keychar in ['RIGHT', 'l']:
                 dx = 1
 
             self._move(self.x+dx, self.y+dy)
