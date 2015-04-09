@@ -28,6 +28,9 @@ class Map(object):
         new_x = e.x + delta_x
         new_y = e.y + delta_y
 
-        if self.console.getChar(new_x, new_y)[0] == 32:
+        if self.check_move(new_x, new_y):
             e.x = new_x
             e.y = new_y
+
+    def check_move(self, x, y):
+        return self.console.getChar(x, y)[0] == 32

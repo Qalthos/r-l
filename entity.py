@@ -23,4 +23,6 @@ class Walker(Entity):
         # Change the location
         delta = [self.x, self.y]
         delta[direction] += magnitude
-        self.x, self.y = delta
+
+        if self.parent.check_move(*delta):
+            self.x, self.y = delta
