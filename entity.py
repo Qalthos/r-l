@@ -12,8 +12,16 @@ class Entity(object):
     def draw(self):
         self.parent.console.drawChar(self.x, self.y, self.char)
 
+    def move(self):
+        raise NotImplementedError
+
+    def _move(self, x, y):
+        if self.parent.check_move(x, y):
+            self.x, self.y = x, y
+
 
 class Walker(Entity):
+    """This is an Entity that wanders around randomly."""
 
     def move(self):
         vector = random.randrange(4)
@@ -21,8 +29,7 @@ class Walker(Entity):
         magnitude = (vector >> 1 & 1) * 2 - 1
 
         # Change the location
-        delta = [self.x, self.y]
-        delta[direction] += magnitude
+        new_location = [self.x, self.y]
+        new_location[direction] += magnitude
 
-        if self.parent.check_move(*delta):
-            self.x, self.y = delta
+        self._move(*new_location)
