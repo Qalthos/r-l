@@ -9,8 +9,8 @@ class Map(object):
 
     def __init__(self):
         self.console = tdl.init(30, 30)
-        self.entities.append(Entity(1, 1, '@'))
-        self.entities.append(Walker(1, 2, 'J'))
+        self.entities.append(Entity(1, 1, '@', self))
+        self.entities.append(Walker(1, 2, 'J', self))
 
     def repaint(self):
         self.console.clear()
