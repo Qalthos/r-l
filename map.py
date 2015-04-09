@@ -8,13 +8,18 @@ class Map(object):
     entities = []
 
     def __init__(self):
-        self.console = tdl.init(30, 30)
+        self.console = tdl.init(80, 40)
+
+        # Keep the walls on their own console.
+        self._map = tdl.Console(80, 40)
+        self._map.drawFrame(0, 0, 80, 40, '#')
+
         self.entities.append(entity.Player(1, 1, '@', self))
         self.entities.append(entity.Walker(1, 2, 'J', self))
 
     def repaint(self):
         self.console.clear()
-        self.console.drawFrame(0, 0, 80, 80, '#')
+        self.console.blit(self._map)
 
         for entity in self.entities:
             try:
