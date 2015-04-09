@@ -17,8 +17,10 @@ class Map(object):
         self.console.drawFrame(0, 0, 80, 80, '#')
 
         for entity in self.entities:
-            if hasattr(entity, 'move'):
+            try:
                 entity.move()
+            except NotImplementedError:
+                pass
             entity.draw()
 
         tdl.flush()
