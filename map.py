@@ -31,4 +31,6 @@ class Map(object):
         tdl.flush()
 
     def check_move(self, x, y):
-        return self.console.getChar(x, y)[0] == 32
+        if not self._map.getChar(x, y)[0] == 32:
+            return False
+        return not any([e.x == x and e.y == y for e in self.entities])
