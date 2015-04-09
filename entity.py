@@ -1,5 +1,7 @@
 import random
 
+import tdl
+
 
 class Entity(object):
 
@@ -18,6 +20,27 @@ class Entity(object):
     def _move(self, x, y):
         if self.parent.check_move(x, y):
             self.x, self.y = x, y
+
+
+class Player(Entity):
+    """Entity representing the player's character."""
+
+    def handle_key(self, event):
+        if event.key in ['UP', 'DOWN', 'LEFT', 'RIGHT']:
+            dx, dy = 0, 0
+            if event.key == 'UP':
+                dy = -1
+            elif event.key == 'LEFT':
+                dx = -1
+            elif event.key == 'DOWN':
+                dy = 1
+            elif event.key == 'RIGHT':
+                dx = 1
+
+            self._move(self.x+dx, self.y+dy)
+
+    def move(self):
+        self.handle_key(tdl.event.keyWait())
 
 
 class Walker(Entity):
