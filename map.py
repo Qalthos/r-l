@@ -32,6 +32,8 @@ class Map(object):
                 entity.move()
             except NotImplementedError:
                 pass
+            except KeyboardInterrupt:
+                return True
 
     def check_move(self, x, y):
         if not self._map.getChar(x, y)[0] == 32:

@@ -8,4 +8,5 @@ if __name__ == '__main__':
 
     while True:
         game_map.repaint()
-        game_map.move_all()
+        if game_map.move_all():
+            break

@@ -26,7 +26,10 @@ class Player(Entity):
     """Entity representing the player's character."""
 
     def handle_key(self, event):
-        if event.keychar in ['UP', 'DOWN', 'LEFT', 'RIGHT', 'h', 'j', 'k', 'l']:
+        if event.keychar == 'q':
+            raise KeyboardInterrupt
+
+        elif event.keychar in ['UP', 'DOWN', 'LEFT', 'RIGHT', 'h', 'j', 'k', 'l']:
             dx, dy = 0, 0
             if event.keychar in ['UP', 'k']:
                 dy = -1
