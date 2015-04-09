@@ -19,7 +19,7 @@ class Map(object):
         for entity in self.entities:
             if hasattr(entity, 'move'):
                 entity.move()
-            entity.draw(self.console)
+            entity.draw()
 
         tdl.flush()
 

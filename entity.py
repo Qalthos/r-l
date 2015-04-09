@@ -9,8 +9,9 @@ class Entity(object):
         self.char = char
         self.parent = parent
 
-    def draw(self, window):
-        window.drawChar(self.x, self.y, self.char)
+    def draw(self):
+        self.parent.console.drawChar(self.x, self.y, self.char)
+
 
 class Walker(Entity):
 
