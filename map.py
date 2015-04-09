@@ -22,13 +22,16 @@ class Map(object):
         self.console.blit(self._map)
 
         for entity in self.entities:
+            entity.draw()
+
+        tdl.flush()
+
+    def move_all(self):
+        for entity in self.entities:
             try:
                 entity.move()
             except NotImplementedError:
                 pass
-            entity.draw()
-
-        tdl.flush()
 
     def check_move(self, x, y):
         if not self._map.getChar(x, y)[0] == 32:
