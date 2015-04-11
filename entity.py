@@ -26,10 +26,15 @@ class Entity(object):
         dest = self.parent.check_move(x, y)
         if dest is None:
             self.x, self.y = x, y
+        elif isinstance(dest, Wall):
+            self.parent.print('oof.')
         elif isinstance(dest, Entity):
             dest.respond(verb.Talk())
-        elif dest == 'wall':
-            self.parent.print('oof.')
+
+
+class Wall(Entity):
+    def __init__(self):
+        pass
 
 
 class Player(Entity):
