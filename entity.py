@@ -12,10 +12,10 @@ class Entity(object):
         self.parent = parent
 
     def draw(self):
-        self.parent.console.drawChar(self.x, self.y, self.char)
+        self.parent.root.drawChar(self.x, self.y, self.char)
 
     def move(self):
-        raise NotImplementedError
+        pass
 
     def _move(self, x, y):
         if self.parent.check_move(x, y):

@@ -11,7 +11,7 @@ class Window(object):
         self.root = tdl.init(80, 40)
 
         self._map = tdl.Console(40, 40)
-        self._map.drawFrame(0, 0, width, height, '#')
+        self._map.drawFrame(0, 0, 40, 40, '#')
 
         self._text = tdl.Console(38, 38)
         self._text.setMode('scroll')
@@ -34,8 +34,6 @@ class Window(object):
         for entity in self.entities:
             try:
                 entity.move()
-            except NotImplementedError:
-                pass
             except KeyboardInterrupt:
                 return True
 
