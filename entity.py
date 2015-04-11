@@ -28,6 +28,8 @@ class Entity(object):
             self.x, self.y = x, y
         elif isinstance(dest, Entity):
             dest.respond(verb.Talk())
+        elif dest == 'wall':
+            self.parent.print('oof.')
 
 
 class Player(Entity):
@@ -67,3 +69,7 @@ class Walker(Entity):
         new_location[direction] += magnitude
 
         self._move(*new_location)
+
+    def respond(self, action):
+        if isinstance(action, verb.Talk):
+            self.parent.print('Go away!')

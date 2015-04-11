@@ -52,3 +52,6 @@ class Window(object):
             return entities[0]
 
         return None
+
+    def print(self, string):
+        self._text.printStr(string + '\n')
