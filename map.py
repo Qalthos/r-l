@@ -35,6 +35,12 @@ class Map(object):
             except KeyboardInterrupt:
                 return True
 
+    def run(self):
+        while True:
+            self.repaint()
+            if self.move_all():
+                break
+
     def check_move(self, x, y):
         if not self._map.getChar(x, y)[0] == 32:
             return False
