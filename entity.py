@@ -18,7 +18,8 @@ class Entity(object):
         pass
 
     def _move(self, x, y):
-        if self.parent.check_move(x, y):
+        dest = self.parent.check_move(x, y)
+        if dest is None:
             self.x, self.y = x, y
 
 

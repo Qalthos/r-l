@@ -44,6 +44,11 @@ class Window(object):
                 break
 
     def check_move(self, x, y):
-        if not self._map.getChar(x, y)[0] == 32:
-            return False
-        return not any([e.x == x and e.y == y for e in self.entities])
+        if self._map.getChar(x, y)[0] == 35:
+            return 'wall'
+
+        entities = [e for e in self.entities if e.x == x and e.y == y]
+        if entities:
+            return entities[0]
+
+        return None
