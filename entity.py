@@ -26,10 +26,11 @@ class Entity(object):
         dest = self.parent.check_move(x, y)
         if dest is None:
             self.x, self.y = x, y
-        elif isinstance(dest, Wall):
-            self.parent.print('oof.')
-        elif isinstance(dest, Entity):
-            dest.respond(verb.Talk())
+        else:
+            self._interact(dest)
+
+    def _interact(self, entity):
+        entity.respond(verb.Talk())
 
 
 class Wall(Entity):
@@ -59,6 +60,12 @@ class Player(Entity):
 
     def move(self):
         self.handle_key(tdl.event.keyWait())
+
+    def _interact(self, entity):
+        if isinstance(entity, Wall):
+            self.parent.print('oof.')
+        else:
+            super()._interact(entity)
 
 
 class Walker(Entity):
