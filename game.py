@@ -1,5 +1,5 @@
-from map import Map
+from window import Window
 
 
-game = Map()
+game = Window()
 game.run()
