@@ -2,6 +2,8 @@ import random
 
 import tdl
 
+import verb
+
 
 class Entity(object):
 
@@ -17,10 +19,15 @@ class Entity(object):
     def move(self):
         pass
 
+    def respond(self, verb):
+        pass
+
     def _move(self, x, y):
         dest = self.parent.check_move(x, y)
         if dest is None:
             self.x, self.y = x, y
+        elif isinstance(dest, Entity):
+            dest.respond(verb.Talk())
 
 
 class Player(Entity):
