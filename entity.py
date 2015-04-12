@@ -42,23 +42,26 @@ class Player(Entity):
     """Entity representing the player's character."""
 
     def move(self):
-        event = tdl.event.keyWait()
+        while True:
+            event = tdl.event.keyWait()
 
-        if event.keychar == 'q':
-            raise KeyboardInterrupt
+            if event.keychar == 'q':
+                raise KeyboardInterrupt
+            elif event.keychar in ['UP', 'DOWN', 'LEFT', 'RIGHT', 'h', 'j', 'k', 'l']:
+                dx, dy = 0, 0
+                if event.keychar in ['UP', 'k']:
+                    dy = -1
+                elif event.keychar in ['LEFT', 'h']:
+                    dx = -1
+                elif event.keychar in ['DOWN', 'j']:
+                    dy = 1
+                elif event.keychar in ['RIGHT', 'l']:
+                    dx = 1
+                self._move(self.x+dx, self.y+dy)
+            else:
+                continue
 
-        elif event.keychar in ['UP', 'DOWN', 'LEFT', 'RIGHT', 'h', 'j', 'k', 'l']:
-            dx, dy = 0, 0
-            if event.keychar in ['UP', 'k']:
-                dy = -1
-            elif event.keychar in ['LEFT', 'h']:
-                dx = -1
-            elif event.keychar in ['DOWN', 'j']:
-                dy = 1
-            elif event.keychar in ['RIGHT', 'l']:
-                dx = 1
-
-            self._move(self.x+dx, self.y+dy)
+            break
 
     def _interact(self, entity):
         if isinstance(entity, Wall):
