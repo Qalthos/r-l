@@ -41,7 +41,9 @@ class Wall(Entity):
 class Player(Entity):
     """Entity representing the player's character."""
 
-    def handle_key(self, event):
+    def move(self):
+        event = tdl.event.keyWait()
+
         if event.keychar == 'q':
             raise KeyboardInterrupt
 
@@ -57,9 +59,6 @@ class Player(Entity):
                 dx = 1
 
             self._move(self.x+dx, self.y+dy)
-
-    def move(self):
-        self.handle_key(tdl.event.keyWait())
 
     def _interact(self, entity):
         if isinstance(entity, Wall):
