@@ -16,6 +16,14 @@ class Window(object):
         self._map = tdl.Console(40, 40)
         self.gen_map('floors.json')
 
+        self._text_frame = tdl.Console(40, 40)
+        self._text_frame.drawRect(0, 1, 40, 38, '║')
+        self._text_frame.drawRect(1, 0, 38, 40, '═')
+        self._text_frame.drawChar(0, 0, '╔')
+        self._text_frame.drawChar(39, 0, '╗')
+        self._text_frame.drawChar(0, 39, '╚')
+        self._text_frame.drawChar(39, 39, '╝')
+
         self._text = tdl.Console(38, 38)
         self._text.setMode('scroll')
 
@@ -52,7 +60,8 @@ class Window(object):
         self.root.clear()
 
         self.root.blit(self._map, width=40)
-        self.root.blit(self._text, x=41, y=1)
+        self._text_frame.blit(self._text, x=1, y=1, width=38, height=38)
+        self.root.blit(self._text_frame, x=40)
 
         for entity in self.entities:
             entity.draw()
