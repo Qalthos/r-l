@@ -27,11 +27,11 @@ class Window(object):
         self._text = tdl.Console(38, 38)
         self._text.setMode('scroll')
 
-    def gen_map(self, filename):
+    def gen_map(self, filename, floor_number=0):
         self._map.clear()
 
         with open(filename) as floor_data:
-            floor = json.load(floor_data)
+            floor = json.load(floor_data)[floor_number]
 
         for room in floor['rooms']:
             self._map.drawFrame(room['x'], room['y'], room['w'], room['h'], '#')
