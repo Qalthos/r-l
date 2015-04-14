@@ -1,3 +1,6 @@
+import importlib
+import json
+
 import tdl
 
 import entity
@@ -11,13 +14,39 @@ class Window(object):
         self.root = tdl.init(80, 40)
 
         self._map = tdl.Console(40, 40)
-        self._map.drawFrame(0, 0, 40, 40, '#')
+        self.gen_map('floors.json')
 
         self._text = tdl.Console(38, 38)
         self._text.setMode('scroll')
 
-        self.entities.append(entity.Player(1, 1, '@', self))
-        self.entities.append(entity.Walker(1, 2, 'J', self))
+    def gen_map(self, filename):
+        self._map.clear()
+
+        with open(filename) as floor_data:
+            floor = json.load(floor_data)
+
+        for room in floor['rooms']:
+            self._map.drawFrame(room['x'], room['y'], room['w'], room['h'], '#')
+        for hall in floor['halls']:
+            x, y = hall['x'] - 1, hall['y'] - 1
+            if hall['dir'] in 'ns':
+                w = 3
+                h = hall['len']
+                ends = (x + 1, y), (x + 1, y + h - 1)
+            elif hall['dir'] in 'ew':
+                w = hall['len']
+                h = 3
+                ends = (x, y + 1), (x + w - 1, y + 1)
+            else:
+                print("Don't know how to read this hall: {}".format(hall))
+            self._map.drawFrame(x, y, w, h, '#')
+            for end in ends:
+                self._map.drawChar(end[0], end[1], ' ')
+
+        for entity in floor['entities']:
+            module, class_ = entity['type'].rsplit('.', 1)
+            package = importlib.import_module(module)
+            self.entities.append(getattr(package, class_)(entity['x'], entity['y'], self))
 
     def repaint(self):
         self.root.clear()
