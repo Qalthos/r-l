@@ -7,10 +7,12 @@ import verb
 
 class Entity(object):
 
-    def __init__(self, x, y, char, parent):
+    default_char = '?'
+
+    def __init__(self, x, y, parent, char=None):
         self.x = x
         self.y = y
-        self.char = char
+        self.char = char or self.default_char
         self.parent = parent
 
     def draw(self):
@@ -40,6 +42,8 @@ class Wall(Entity):
 
 class Player(Entity):
     """Entity representing the player's character."""
+
+    default_char = '@'
 
     def move(self):
         while True:
